@@ -22,7 +22,7 @@ class Trie {
 public:
     Trie<T>();
 
-    ~Trie() = default;
+    virtual ~Trie<T>()        = default;
 
     Trie(const Trie<T>& orig) = default;
 

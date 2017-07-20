@@ -20,10 +20,10 @@
 template<typename Lexem_type>
 class Scaner{
 public:
-    Scaner<Lexem_type>() = default;
+    Scaner<Lexem_type>()                   = default;
     Scaner(Location_ptr location, const Errors_and_tries& et);
     Scaner(const Scaner<Lexem_type>& orig) = default;
-    virtual ~Scaner() = default;
+    virtual ~Scaner<Lexem_type>()          = default;
     /*  Function back() return the current lexem into the input stream. */
     void back();
     /* Function current_lexem() returns information about current lexem,
