@@ -15,13 +15,16 @@
 #include "../include/abstract_scaner.h"
 #include "../include/error_count.h"
 #include "../include/trie.h"
+#include "../include/trie_for_set.h"
 #include "../include/aux_expr_lexem.h"
 
 class Aux_expr_scaner : public Scaner<Aux_expr_lexem_info> {
 public:
     Aux_expr_scaner()                            = default;
-    Aux_expr_scaner(Location_ptr location, const Errors_and_tries& et) :
-        Scaner<Aux_expr_lexem_info>(location, et) {};
+    Aux_expr_scaner(const Location_ptr& location,
+                    const Errors_and_tries& et,
+                    const Trie_for_set_of_char32ptr& tsc) :
+        Scaner<Aux_expr_lexem_info>(location, et), char32_set(tsc) {};
     Aux_expr_scaner(const Aux_expr_scaner& orig) = default;
     virtual ~Aux_expr_scaner()                   = default;
     virtual Aux_expr_lexem_info current_lexem();
@@ -33,9 +36,12 @@ private:
 //          After_backslash,   Begin_expr,        End_expr
 //     };
 //
+    Trie_for_set_of_char32ptr char32_set;
+
     enum Automaton_name{
         A_start,     A_unknown, A_action,
         A_delimiter, A_class,   A_char
+        A_hat
     };
     Automaton_name automaton; /* current automaton */
     int            state;     /* current state of the current automaton */
@@ -56,10 +62,12 @@ private:
     bool start_proc();     bool unknown_proc();
     bool action_proc();    bool delimiter_proc();
     bool classes_proc();   bool char_proc();
+    bool hat_proc();
     /* functions to perform actions in case of unexpected end of lexem */
     void none_final_proc();      void unknown_final_proc();
     void action_final_proc();    void delimiter_final_proc();
     void classes_final_proc();   void char_final_proc();
+    void hat_final_proc();
     /* If the lexem most likely is character class, then the following
      * function corrects lexem code, and displays the needed diagnostic
      * messsage. */

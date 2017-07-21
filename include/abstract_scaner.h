@@ -16,12 +16,13 @@
 #include "../include/trie.h"
 #include "../include/location.h"
 #include "../include/errors_and_tries.h"
+#include "../include/char_trie.h"
 
 template<typename Lexem_type>
 class Scaner{
 public:
     Scaner<Lexem_type>()                   = default;
-    Scaner(Location_ptr location, const Errors_and_tries& et);
+    Scaner(const Location_ptr& location, const Errors_and_tries& et);
     Scaner(const Scaner<Lexem_type>& orig) = default;
     virtual ~Scaner<Lexem_type>()          = default;
     /*  Function back() return the current lexem into the input stream. */
@@ -31,7 +32,7 @@ public:
     virtual Lexem_type current_lexem() = 0;
     /* Function lexem_begin_line_number() returns the line number
      * at which the lexem starts. */
-    size_t lexem_begin_line_number();
+    size_t lexem_begin_line_number() const;
 protected:
     int                          state; /* the current state of the current automaton */
 
@@ -74,7 +75,7 @@ void Scaner<Lexem_type>::back(){
 }
 
 template<typename Lexem_type>
-size_t Scaner<Lexem_type>::lexem_begin_line_number(){
+size_t Scaner<Lexem_type>::lexem_begin_line_number() const{
     return lexem_begin_line;
 }
 #endif

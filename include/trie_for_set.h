@@ -12,6 +12,7 @@
 #include "../include/trie.h"
 #include <set>
 #include <string>
+#include <memory>
 
 template<typename T>
 class Trie_for_set : public Trie<T>{
@@ -55,4 +56,9 @@ size_t Trie_for_set<T>::insertSet(const std::set<T>& s){
     size_t idx = insert(str);
     return idx;
 }
+
+using Trie_for_set_of_char32    = Trie_for_set<char32_t>;
+using Trie_for_set_of_sizet     = Trie_for_set<char32_t>;
+using Trie_for_set_of_char32ptr = std::shared_ptr<Trie_for_set_of_char32>;
+using Trie_for_set_of_sizetptr  = std::shared_ptr<Trie_for_set_of_sizet>;
 #endif
