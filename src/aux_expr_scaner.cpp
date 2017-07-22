@@ -354,7 +354,8 @@ void Aux_expr_scaner::correct_class(){
 }
 
 Aux_expr_lexem_info Aux_expr_scaner::current_lexem(){
-    automaton = A_start; token.code = Nothing;
+    automaton   = A_start;
+    token.code  = Aux_expr_lexem_code::Nothing;
     lexem_begin = loc->pcurrent_char;
     bool t = true;
     while((ch = *(loc->pcurrent_char)++)){
@@ -441,70 +442,70 @@ bool Aux_expr_scaner::unknown_proc(){
 //     }
 //     return t;
 // }
-//
-// bool Aux_expr_scaner::char_proc(){
-//     if(belongs(After_backslash, char_categories)){
-//         token.c = (U'n' == ch) ? U'\n' : ch;
-//         (loc->pcurrent_char)++;
-//     }else{
-//         token.c = U'\\';
-//     }
-//     return false;
-// }
-//
-// bool Aux_expr_scaner::delimiter_proc(){
-//     bool t = false;
-//     switch((char)ch){
-//         case U'{':
-//             token.code = Begin_expression;
-//             break;
-//         case U'}':
-//             token.code = End_expression;
-//             break;
-//         case U'(':
-//             token.code = Opened_round_brack;
-//             break;
-//         case U')':
-//             token.code = Closed_round_brack;
-//             break;
-//         case U'|':
-//             token.code = Or;
-//             break;
-//         case U'*':
-//             token.code = Kleene_closure;
-//             break;
-//         case U'+':
-//             token.code = Positive_closure;
-//             break;
-//         case U'?':
-//             token.code = Optional_member;
-//             break;
-//     }
-//     (loc->pcurrent_char)++;
-//     return t;
-// }
-//
-// bool Aux_expr_scaner::action_proc(){
-//     bool t = true;
-//     /* The variable t is true if the action name has not yet
-//      * been fully read, and false otherwise. */
-//     if(-1 == state){
-//         if(belongs(Action_name_begin, char_categories)){
-//             buffer += ch; state = 0;
-//         }else{
-//             printf("A Latin letter or an underscore is expected on the %zu line.\n",
-//                     loc->current_line);
-//             en -> increment_number_of_errors();
-//             t = false;
-//         }
-//         return t;
-//     }
-//     t = belongs(Action_name_body, char_categories);
-//     if(t){
-//         buffer += ch;
-//     }
-//     return t;
-// }
+
+bool Aux_expr_scaner::char_proc(){
+    if(belongs(After_backslash, char_categories)){
+        token.c = (U'n' == ch) ? U'\n' : ch;
+        (loc->pcurrent_char)++;
+    }else{
+        token.c = U'\\';
+    }
+    return false;
+}
+
+bool Aux_expr_scaner::delimiter_proc(){
+    bool t = false;
+    switch(ch){
+        case U'{':
+            token.code = Begin_expression;
+            break;
+        case U'}':
+            token.code = End_expression;
+            break;
+        case U'(':
+            token.code = Opened_round_brack;
+            break;
+        case U')':
+            token.code = Closed_round_brack;
+            break;
+        case U'|':
+            token.code = Or;
+            break;
+        case U'*':
+            token.code = Kleene_closure;
+            break;
+        case U'+':
+            token.code = Positive_closure;
+            break;
+        case U'?':
+            token.code = Optional_member;
+            break;
+    }
+    (loc->pcurrent_char)++;
+    return t;
+}
+
+bool Aux_expr_scaner::action_proc(){
+    bool t = true;
+    /* The variable t is true if the action name has not yet
+     * been fully read, and false otherwise. */
+    if(-1 == state){
+        if(belongs(Action_name_begin, char_categories)){
+            buffer += ch; state = 0;
+        }else{
+            printf("A Latin letter or an underscore is expected on the %zu line.\n",
+                    loc->current_line);
+            en -> increment_number_of_errors();
+            t = false;
+        }
+        return t;
+    }
+    t = belongs(Action_name_body, char_categories);
+    if(t){
+        buffer += ch;
+    }
+    return t;
+}
 
 void Aux_expr_scaner::none_final_proc(){
     /* This subroutine will be called if, after reading the input text, it turned out
@@ -516,21 +517,21 @@ void Aux_expr_scaner::unknown_final_proc(){
      * to be in the A_unknown automaton. Then you do not need to do anything. */
 }
 
-// void Aux_expr_scaner::action_final_proc(){
-//     /* This function will be called if, after reading the input stream, they were
-//      * in the action names processing automaton, the A_action automaton. Then this
-//      * name should be written in the prefix tree of identifiers. */
-//     token.action_name_index = ids -> insert(buffer);
-// }
-//
-// void Aux_expr_scaner::delimiter_final_proc(){
-// }
-//
+void Aux_expr_scaner::action_final_proc(){
+    /* This function will be called if, after reading the input stream, they were
+     * in the action names processing automaton, the A_action automaton. Then this
+     * name should be written in the prefix tree of identifiers. */
+    token.action_name_index = ids -> insert(buffer);
+}
+
+void Aux_expr_scaner::delimiter_final_proc(){
+}
+
 // void Aux_expr_scaner::classes_final_proc(){
 //     token.code = a_classes_jump_table[state].code;
 //     correct_class();
 // }
-//
-// void Aux_expr_scaner::char_final_proc(){
-//     token.c = U'\\';
-// }
+
+void Aux_expr_scaner::char_final_proc(){
+    token.c = U'\\';
+}
