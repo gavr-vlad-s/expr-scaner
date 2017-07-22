@@ -15,29 +15,17 @@
 #include "../include/abstract_scaner.h"
 #include "../include/error_count.h"
 #include "../include/trie.h"
-#include "../include/trie_for_set.h"
 #include "../include/aux_expr_lexem.h"
 
 class Aux_expr_scaner : public Scaner<Aux_expr_lexem_info> {
 public:
     Aux_expr_scaner()                            = default;
-    Aux_expr_scaner(const Location_ptr& location,
-                    const Errors_and_tries& et,
-                    const Trie_for_set_of_char32ptr& tsc) :
-        Scaner<Aux_expr_lexem_info>(location, et), char32_set(tsc) {};
+    Aux_expr_scaner(const Location_ptr& location, const Errors_and_tries& et) :
+        Scaner<Aux_expr_lexem_info>(location, et) {};
     Aux_expr_scaner(const Aux_expr_scaner& orig) = default;
     virtual ~Aux_expr_scaner()                   = default;
     virtual Aux_expr_lexem_info current_lexem();
 private:
-//     enum Category : unsigned short {
-//          Spaces,            Other,             Action_name_begin,
-//          Action_name_body,  Delimiters,        Dollar,
-//          Backslash,         Opened_square_br,  After_colon,
-//          After_backslash,   Begin_expr,        End_expr
-//     };
-//
-    Trie_for_set_of_char32ptr char32_set;
-
     enum Automaton_name{
         A_start,     A_unknown, A_action,
         A_delimiter, A_class,   A_char
