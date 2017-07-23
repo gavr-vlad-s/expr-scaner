@@ -60,9 +60,6 @@ private:
      * function corrects lexem code, and displays the needed diagnostic
      * messsage. */
     void correct_class();
-//     /* The following function returns the set of character categories such that
-//      * the character c belongs these categories. */
-//     uint64_t get_categories_set(char32_t c);
 };
 
 using Aux_expr_scaner_ptr = std::shared_ptr<Aux_expr_scaner>;
