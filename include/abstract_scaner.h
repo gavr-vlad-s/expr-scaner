@@ -61,7 +61,7 @@ protected:
 };
 
 template<typename Lexem_type>
-Scaner<Lexem_type>::Scaner(Location_ptr location, const Errors_and_tries& et){
+Scaner<Lexem_type>::Scaner(const Location_ptr& location, const Errors_and_tries& et){
     ids = et.ids_trie; strs = et.strs_trie; en = et.ec;
     loc = location;
     lexem_begin = location->pcurrent_char;

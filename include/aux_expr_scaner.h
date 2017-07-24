@@ -28,7 +28,7 @@ public:
 private:
     enum Automaton_name{
         A_start,     A_unknown, A_action,
-        A_delimiter, A_class,   A_char
+        A_delimiter, A_class,   A_char,
         A_hat
     };
     Automaton_name automaton; /* current automaton */

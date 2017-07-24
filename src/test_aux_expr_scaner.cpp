@@ -31,9 +31,9 @@ static const char* lexem_names[] = {
 };
 
 void print_aux_lexem(Aux_expr_lexem_info li){
-    Aux_expr_lexem_info lc = li.code;
-    printf("%s", lexem_names[lc]);
-    if(Character == lc){
+    Aux_expr_lexem_code lc = li.code;
+    printf("%s", lexem_names[static_cast<uint16_t>(lc)]);
+    if(Aux_expr_lexem_code::Character == lc){
         char32_t ch = li.c;
         if(ch < U' '){
             printf(" %u", ch);
@@ -50,6 +50,6 @@ void test_aux_scaner(std::shared_ptr<Aux_expr_scaner> sc)
     Aux_expr_lexem_info lexem;
     do{
         lexem = sc -> current_lexem();
-        print_lexem(lexem);
-    }while(lexem.code);
+        print_aux_lexem(lexem);
+    }while(lexem.code != Aux_expr_lexem_code::Nothing);
 }

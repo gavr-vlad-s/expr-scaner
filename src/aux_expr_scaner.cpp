@@ -104,7 +104,7 @@ uint64_t get_categories_set(char32_t c)
     auto t = knuth_find(categories_table,
                         categories_table + num_of_elems_in_categories_table,
                         c);
-    return t.first ? categories_table[t.second].value : (1ULL << Other)
+    return t.first ? categories_table[t.second].value : (1ULL << Other);
 }
 
 /**
@@ -413,28 +413,28 @@ bool Aux_expr_scaner::delimiter_proc(){
     bool t = false;
     switch(ch){
         case U'{':
-            token.code = Begin_expression;
+            token.code = Aux_expr_lexem_code::Begin_expression;
             break;
         case U'}':
-            token.code = End_expression;
+            token.code = Aux_expr_lexem_code::End_expression;
             break;
         case U'(':
-            token.code = Opened_round_brack;
+            token.code = Aux_expr_lexem_code::Opened_round_brack;
             break;
         case U')':
-            token.code = Closed_round_brack;
+            token.code = Aux_expr_lexem_code::Closed_round_brack;
             break;
         case U'|':
-            token.code = Or;
+            token.code = Aux_expr_lexem_code::Or;
             break;
         case U'*':
-            token.code = Kleene_closure;
+            token.code = Aux_expr_lexem_code::Kleene_closure;
             break;
         case U'+':
-            token.code = Positive_closure;
+            token.code = Aux_expr_lexem_code::Positive_closure;
             break;
         case U'?':
-            token.code = Optional_member;
+            token.code = Aux_expr_lexem_code::Optional_member;
             break;
     }
     (loc->pcurrent_char)++;

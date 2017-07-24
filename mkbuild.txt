@@ -1,4 +1,4 @@
-project(myauka)
+project(test_scaner_main)
 compiler(g++)
 linker(g++)
 source_dir("src")
