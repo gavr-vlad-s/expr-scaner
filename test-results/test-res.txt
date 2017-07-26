@@ -1,0 +1,307 @@
+{Other}
+Character '{' 
+{Other}
+Character '(' 
+{Other}
+Character '[' 
+{Other}
+Character ':' 
+{Other}
+Character 'L' 
+{Action_name_begin, Action_name_body}
+Character 'a' 
+{Other}
+Character 't' 
+{Other}
+Character 'i' 
+{Other}
+Character 'n' 
+{Other}
+Character ':' 
+{Other}
+Character ']' 
+{Other}
+Character '|' 
+{Other}
+Character '[' 
+{Other}
+Character ':' 
+{Other}
+Character 'l' 
+{Action_name_begin, Action_name_body}
+Character 'a' 
+{Other}
+Character 't' 
+{Other}
+Character 'i' 
+{Other}
+Character 'n' 
+{Other}
+Character ':' 
+{Other}
+Character ']' 
+{Other}
+Character '|' 
+{Other}
+Character '[' 
+{Other}
+Character ':' 
+{Other}
+Character 'R' 
+{Other}
+Character 'u' 
+{Other}
+Character 's' 
+{Other}
+Character 's' 
+{Other}
+Character 'i' 
+{Action_name_begin, Action_name_body}
+Character 'a' 
+{Other}
+Character 'n' 
+{Other}
+Character ':' 
+{Other}
+Character ']' 
+{Other}
+Character '|' 
+{Other}
+Character '[' 
+{Other}
+Character ':' 
+{Other}
+Character 'r' 
+{Other}
+Character 'u' 
+{Other}
+Character 's' 
+{Other}
+Character 's' 
+{Other}
+Character 'i' 
+{Action_name_begin, Action_name_body}
+Character 'a' 
+{Other}
+Character 'n' 
+{Other}
+Character ':' 
+{Other}
+Character ']' 
+{Other}
+Character '|' 
+{Other}
+Character '[' 
+{Other}
+Character ':' 
+{Other}
+Character 'b' 
+{Other}
+Character 'd' 
+{Other}
+Character 'i' 
+{Other}
+Character 'g' 
+{Other}
+Character 'i' 
+{Other}
+Character 't' 
+{Other}
+Character 's' 
+{Other}
+Character ':' 
+{Other}
+Character ']' 
+{Other}
+Character '|' 
+{Other}
+Character '_' 
+{Other}
+Character ')' 
+{Other}
+Character '+' 
+{Other}
+Character '[' 
+{Other}
+Character ':' 
+{Other}
+Character 'd' 
+{Other}
+Character 'i' 
+{Other}
+Character 'g' 
+{Other}
+Character 'i' 
+{Other}
+Character 't' 
+{Other}
+Character 's' 
+{Other}
+Character ':' 
+{Other}
+Character ']' 
+{Other}
+Character '?' 
+{Other}
+Character '[' 
+{Other}
+Character ':' 
+{Other}
+Character 'x' 
+{Other}
+Character 'd' 
+{Other}
+Character 'i' 
+{Other}
+Character 'g' 
+{Other}
+Character 'i' 
+{Other}
+Character 't' 
+{Other}
+Character 's' 
+{Other}
+Character ':' 
+{Other}
+Character ']' 
+{Other}
+Character '*' 
+{Other}
+Character '\' 
+{Other}
+Character '[' 
+{Other}
+Character '\' 
+{Other}
+Character ']' 
+{Other}
+Character '\' 
+{Other}
+Character 'n' 
+{Other}
+Character '\' 
+{Other}
+Character '\' 
+{Other}
+Character '\' 
+{Other}
+Character '"' 
+{Other}
+Character '\' 
+{Other}
+Character '$' 
+{Other}
+Character '\' 
+{Other}
+Character '?' 
+{Other}
+Character '\' 
+{Other}
+Character '|' 
+{Other}
+Character '\' 
+{Other}
+Character '+' 
+{Other}
+Character '\' 
+{Other}
+Character '*' 
+{Other}
+Character '\' 
+{Other}
+Character '{' 
+{Other}
+Character '\' 
+{Delimiters, After_backslash, End_expr}
+{Delimiters, After_backslash, End_expr}
+End_expression 
+{Other}
+Character '\' 
+{Other}
+Character '(' 
+{Other}
+Character '\' 
+{Other}
+Character ')' 
+{Other}
+Character 'Ё' 
+{Other}
+Character '[' 
+{Other}
+Character ':' 
+{Other}
+Character 'L' 
+{Other}
+Character 'e' 
+{Other}
+Character 't' 
+{Other}
+Character 't' 
+{Other}
+Character 'e' 
+{Other}
+Character 'r' 
+{Other}
+Character ':' 
+{Other}
+Character ']' 
+{Other}
+Character '[' 
+{Other}
+Character ':' 
+{Other}
+Character 'l' 
+{Other}
+Character 'e' 
+{Other}
+Character 't' 
+{Other}
+Character 't' 
+{Other}
+Character 'e' 
+{Other}
+Character 'r' 
+{Other}
+Character ':' 
+{Other}
+Character ']' 
+{Other}
+Character '[' 
+{Other}
+Character ':' 
+{Other}
+Character 'n' 
+{Other}
+Character 's' 
+{Other}
+Character 'q' 
+{Other}
+Character ':' 
+{Other}
+Character ']' 
+{Other}
+Character '$' 
+{Other}
+Character 'u' 
+{Other}
+Character 'r' 
+{Other}
+Character 'r' 
+{Other}
+Character '[' 
+{Other}
+Character ':' 
+{Other}
+Character 'n' 
+{Other}
+Character 'd' 
+{Other}
+Character 'q' 
+{Other}
+Character ':' 
+{Other}
+Character ']' 
+{Delimiters, After_backslash, End_expr}
+{Delimiters, After_backslash, End_expr}
+End_expression 
+Nothing 

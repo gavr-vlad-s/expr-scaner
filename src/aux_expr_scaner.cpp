@@ -17,6 +17,11 @@
 #include "../include/search_char.h"
 #include "../include/get_init_state.h"
 
+#define DEBUG_MODE
+#ifdef DEBUG_MODE
+#include <string>
+#endif
+
 enum Category : uint16_t {
     Spaces,            Other,             Action_name_begin,
     Action_name_body,  Delimiters,        Dollar,
@@ -24,6 +29,38 @@ enum Category : uint16_t {
     After_backslash,   Begin_expr,        End_expr,
     Hat
 };
+
+#ifdef DEBUG_MODE
+static const std::string category_string[] = {
+    "Spaces",            "Other",             "Action_name_begin",
+    "Action_name_body",  "Delimiters",        "Dollar",
+    "Backslash",         "Opened_square_br",  "After_colon",
+    "After_backslash",   "Begin_expr",        "End_expr",
+    "Hat"
+};
+
+static std::string show_categories_set(uint64_t cs)
+{
+    std::string result;
+    for(uint64_t i = Spaces; i <= Hat; ++i)
+    {
+        if(belongs(i, cs)){
+            result += category_string[i] + ", ";
+        }
+    }
+    if(!result.empty()){
+        result.pop_back();
+        result.pop_back();
+    }
+    result = "{" + result + "}";
+    return result;
+}
+
+static void print_categories_set(uint64_t cs){
+    std::string s = show_categories_set(cs);
+    printf("%s\n", s.c_str());
+}
+#endif
 
 /*
  * It happens that in std::map<K,V> the key type is integer, and a lot of keys with the same corresponding values.
@@ -83,7 +120,8 @@ std::pair<bool, size_t> knuth_find(I it_begin, I it_end, K key)
     }
     return result;
 }
-static const Segment_with_value<char32_t, uint16_t> categories_table[] = {
+
+static const Segment_with_value<char32_t, uint64_t> categories_table[] = {
     {{U'}',  U'}'}, 2576},  {{U'a', U'a'},  12},  {{U'M', U'Q'},   12},
     {{U'b',  U'b'},  268},  {{U'0', U'9'},   8},  {{U'c', U'c'},   12},
     {{U'R',  U'R'},  268},  {{U'd', U'd'}, 268},  {{U'$', U'$'},  544},
@@ -314,6 +352,9 @@ Aux_expr_lexem_info Aux_expr_scaner::current_lexem(){
     bool t = true;
     while((ch = *(loc->pcurrent_char)++)){
         char_categories = get_categories_set(ch);
+#ifdef DEBUG_MODE
+        print_categories_set(char_categories);
+#endif
         t = (this->*procs[automaton])();
         if(!t){
             /* We get here only if the lexeme has already been read. At the same time,
