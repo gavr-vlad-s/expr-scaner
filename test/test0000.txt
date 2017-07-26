@@ -1,0 +1,1 @@
+{([:Latin:]|[:latin:]|[:Russian:]|[:russian:]|[:bdigits:]|_)+[:digits:]?[:xdigits:]*\[\]\n\\\"\$\?\|\+\*\{\}\(\)Ё[:Letter:][:letter:][:nsq:]$urr[:ndq:]}
