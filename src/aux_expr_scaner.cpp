@@ -405,6 +405,12 @@ static const State_for_char init_table_for_classes[] = {
     {54, U'n'}, {63, U'o'}, {72, U'r'}, {81, U'x'}
 };
 
+static const char* expects_LRbdlnorx =
+    "The line %zu expects one of the following characters: L, R, b, d, l, n, o, r, x.\n";
+
+static const char* latin_letter_expected =
+    "A Latin letter or an underscore is expected on the %zu line.\n";
+
 bool Aux_expr_scaner::classes_proc(){
     bool t = false;
     switch(state){
@@ -423,9 +429,7 @@ bool Aux_expr_scaner::classes_proc(){
             }else if(belongs(Hat, char_categories)){
                 token.code = Aux_expr_lexem_code::Begin_char_class_complement;
             }else{
-                printf("The line %zu expects one of the following characters: "
-                       "L, R, b, d, l, n, o, r, x.\n",
-                       loc->current_line);
+                printf(expects_LRbdlnorx, loc->current_line);
                 en -> increment_number_of_errors();
             }
             break;
@@ -490,8 +494,7 @@ bool Aux_expr_scaner::action_proc(){
         if(belongs(Action_name_begin, char_categories)){
             buffer += ch; state = 0;
         }else{
-            printf("A Latin letter or an underscore is expected on the %zu line.\n",
-                    loc->current_line);
+            printf(latin_letter_expected, loc->current_line);
             en -> increment_number_of_errors();
             t = false;
         }
