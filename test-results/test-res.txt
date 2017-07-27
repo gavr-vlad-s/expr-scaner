@@ -1,307 +1,42 @@
-{Other}
-Character '{' 
-{Other}
-Character '(' 
-{Other}
-Character '[' 
-{Other}
-Character ':' 
-{Other}
-Character 'L' 
-{Action_name_begin, Action_name_body}
-Character 'a' 
-{Other}
-Character 't' 
-{Other}
-Character 'i' 
-{Other}
-Character 'n' 
-{Other}
-Character ':' 
-{Other}
-Character ']' 
-{Other}
-Character '|' 
-{Other}
-Character '[' 
-{Other}
-Character ':' 
-{Other}
-Character 'l' 
-{Action_name_begin, Action_name_body}
-Character 'a' 
-{Other}
-Character 't' 
-{Other}
-Character 'i' 
-{Other}
-Character 'n' 
-{Other}
-Character ':' 
-{Other}
-Character ']' 
-{Other}
-Character '|' 
-{Other}
-Character '[' 
-{Other}
-Character ':' 
-{Other}
-Character 'R' 
-{Other}
-Character 'u' 
-{Other}
-Character 's' 
-{Other}
-Character 's' 
-{Other}
-Character 'i' 
-{Action_name_begin, Action_name_body}
-Character 'a' 
-{Other}
-Character 'n' 
-{Other}
-Character ':' 
-{Other}
-Character ']' 
-{Other}
-Character '|' 
-{Other}
-Character '[' 
-{Other}
-Character ':' 
-{Other}
-Character 'r' 
-{Other}
-Character 'u' 
-{Other}
-Character 's' 
-{Other}
-Character 's' 
-{Other}
-Character 'i' 
-{Action_name_begin, Action_name_body}
-Character 'a' 
-{Other}
-Character 'n' 
-{Other}
-Character ':' 
-{Other}
-Character ']' 
-{Other}
-Character '|' 
-{Other}
-Character '[' 
-{Other}
-Character ':' 
-{Other}
-Character 'b' 
-{Other}
-Character 'd' 
-{Other}
-Character 'i' 
-{Other}
-Character 'g' 
-{Other}
-Character 'i' 
-{Other}
-Character 't' 
-{Other}
-Character 's' 
-{Other}
-Character ':' 
-{Other}
-Character ']' 
-{Other}
-Character '|' 
-{Other}
+Begin_expression 
+Opened_round_brack 
+Class_Latin 
+Or 
+Class_latin 
+Or 
+Class_Russian 
+Or 
+Class_russian 
+Or 
+Class_bdigits 
+Or 
 Character '_' 
-{Other}
-Character ')' 
-{Other}
-Character '+' 
-{Other}
+Closed_round_brack 
+Positive_closure 
+Class_digits 
+Optional_member 
+Class_xdigits 
+Kleene_closure 
 Character '[' 
-{Other}
-Character ':' 
-{Other}
-Character 'd' 
-{Other}
-Character 'i' 
-{Other}
-Character 'g' 
-{Other}
-Character 'i' 
-{Other}
-Character 't' 
-{Other}
-Character 's' 
-{Other}
-Character ':' 
-{Other}
 Character ']' 
-{Other}
-Character '?' 
-{Other}
-Character '[' 
-{Other}
-Character ':' 
-{Other}
-Character 'x' 
-{Other}
-Character 'd' 
-{Other}
-Character 'i' 
-{Other}
-Character 'g' 
-{Other}
-Character 'i' 
-{Other}
-Character 't' 
-{Other}
-Character 's' 
-{Other}
-Character ':' 
-{Other}
-Character ']' 
-{Other}
-Character '*' 
-{Other}
+Character 10 
 Character '\' 
-{Other}
-Character '[' 
-{Other}
 Character '\' 
-{Other}
-Character ']' 
-{Other}
-Character '\' 
-{Other}
-Character 'n' 
-{Other}
-Character '\' 
-{Other}
-Character '\' 
-{Other}
-Character '\' 
-{Other}
 Character '"' 
-{Other}
-Character '\' 
-{Other}
 Character '$' 
-{Other}
-Character '\' 
-{Other}
 Character '?' 
-{Other}
-Character '\' 
-{Other}
 Character '|' 
-{Other}
-Character '\' 
-{Other}
 Character '+' 
-{Other}
-Character '\' 
-{Other}
 Character '*' 
-{Other}
-Character '\' 
-{Other}
 Character '{' 
-{Other}
-Character '\' 
-{Delimiters, After_backslash, End_expr}
-{Delimiters, After_backslash, End_expr}
-End_expression 
-{Other}
-Character '\' 
-{Other}
+Character '}' 
 Character '(' 
-{Other}
-Character '\' 
-{Other}
 Character ')' 
-{Other}
 Character 'Ё' 
-{Other}
-Character '[' 
-{Other}
-Character ':' 
-{Other}
-Character 'L' 
-{Other}
-Character 'e' 
-{Other}
-Character 't' 
-{Other}
-Character 't' 
-{Other}
-Character 'e' 
-{Other}
-Character 'r' 
-{Other}
-Character ':' 
-{Other}
-Character ']' 
-{Other}
-Character '[' 
-{Other}
-Character ':' 
-{Other}
-Character 'l' 
-{Other}
-Character 'e' 
-{Other}
-Character 't' 
-{Other}
-Character 't' 
-{Other}
-Character 'e' 
-{Other}
-Character 'r' 
-{Other}
-Character ':' 
-{Other}
-Character ']' 
-{Other}
-Character '[' 
-{Other}
-Character ':' 
-{Other}
-Character 'n' 
-{Other}
-Character 's' 
-{Other}
-Character 'q' 
-{Other}
-Character ':' 
-{Other}
-Character ']' 
-{Other}
-Character '$' 
-{Other}
-Character 'u' 
-{Other}
-Character 'r' 
-{Other}
-Character 'r' 
-{Other}
-Character '[' 
-{Other}
-Character ':' 
-{Other}
-Character 'n' 
-{Other}
-Character 'd' 
-{Other}
-Character 'q' 
-{Other}
-Character ':' 
-{Other}
-Character ']' 
-{Delimiters, After_backslash, End_expr}
-{Delimiters, After_backslash, End_expr}
+Class_Letter 
+Class_letter 
+Class_nsq 
+Action 
+Class_ndq 
 End_expression 
 Nothing 

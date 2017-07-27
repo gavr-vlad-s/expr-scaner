@@ -17,7 +17,7 @@
 #include "../include/search_char.h"
 #include "../include/get_init_state.h"
 
-#define DEBUG_MODE
+// #define DEBUG_MODE
 #ifdef DEBUG_MODE
 #include <string>
 #endif
