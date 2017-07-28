@@ -62,5 +62,5 @@ private:
     void correct_class();
 };
 
-using Aux_expr_scaner_ptr = std::shared_ptr<Aux_expr_scaner>;
+using Aux_expr_scaner_ptr = std::unique_ptr<Aux_expr_scaner>;
 #endif

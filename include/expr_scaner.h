@@ -18,56 +18,72 @@
 #include "../include/trie_for_set.h"
 #include "../include/expr_lexem_info.h"
 
-class Expr_scaner : public Scaner<Expr_lexem_info> {
+class Expr_scaner{
 public:
     Expr_scaner()                        = default;
-    Expr_scaner(Location_ptr location, const Errors_and_tries& et) :
-        Scaner<Expr_lexem_info>(location, et) {};
+    Expr_scaner(const Location_ptr&              location,
+                const Errors_and_tries&          et,
+                const Trie_for_set_of_char32ptr& trie_for_complement_of_set) :
+        aux_scaner(std::make_unique<Aux_expr_scaner>(location, et)),
+        compl_set_trie(trie_for_complement_of_set) {};
     Expr_scaner(const Expr_scaner& orig) = default;
-    virtual ~Expr_scaner()               = default;
-    virtual Expr_lexem_info current_lexem();
+    ~Expr_scaner()                       = default;
+
+    Expr_lexem_info current_lexem();
 private:
-//     enum Category : unsigned short {
-//          Spaces,            Other,             Action_name_begin,
-//          Action_name_body,  Delimiters,        Dollar,
-//          Backslash,         Opened_square_br,  After_colon,
-//          After_backslash,   Begin_expr,        End_expr
-//     };
-//
-//     enum Automaton_name{
-//         A_start,     A_unknown, A_action,
-//         A_delimiter, A_class,   A_char
-//     };
-//     Automaton_name automaton; /* current automaton */
-//     int            state;     /* current state of the current automaton */
-//
-//     typedef bool (Expr_scaner::*Automaton_proc)();
-//     /* It is the type of the pointer on function-member that implements
-//      * the state machine that handles the lexem. The function should
-//      * return true if the token has not been read to the end,
-//      * and false otherwise. */
-//
-//     typedef void (Expr_scaner::*Final_proc)();
-//     /* It is the type of the pointer on function-member that performs
-//      * the necessary actions in case of unexpected end of lexem. */
-//
-//     static Automaton_proc procs[];
-//     static Final_proc     finals[];
-//     /* functions for handling lexems: */
-//     bool start_proc();     bool unknown_proc();
-//     bool action_proc();    bool delimiter_proc();
-//     bool classes_proc();   bool char_proc();
-//     /* functions to perform actions in case of unexpected end of lexem */
-//     void none_final_proc();      void unknown_final_proc();
-//     void action_final_proc();    void delimiter_final_proc();
-//     void classes_final_proc();   void char_final_proc();
-//     /* If the lexem most likely is character class, then the following
-//      * function corrects lexem code, and displays the needed diagnostic
-//      * messsage. */
-//     void correct_class();
-//     /* The following function returns the set of character categories such that
-//      * the character c belongs these categories. */
-//     uint64_t get_categories_set(char32_t c);
+    Trie_for_set_of_char32ptr compl_set_trie;
+    Aux_expr_scaner_ptr       aux_scaner;
+
+    enum class State{
+        Begin_class_complement, First_char,
+        Body_chars,             End_class_complement
+    };
+
+/*
+ * The lexeme 'character class complement' can be descripted as the following regular
+ * expression:
+ *          ab+c
+ * where
+ *      a is the lexeme 'Begin_char_class_complement',
+ *      b is the lexeme 'Character',
+ *      c is the lexeme 'End_char_class_complement'.
+ *
+ * If we construct a non-deterministic finite automaton by this regexp, next we build
+ * a corresponding deterministic finite automaton, and, finally, we minimize the
+ * deterministic automaton, then we obtain a finite automaton with the following
+ * transition table:
+ *
+ * |-------|---|---|---|--------------|
+ * | State | a | b | c |    Remark    |
+ * |-------|---|---|---|--------------|
+ * |   A   | B |   |   | Begin state. |
+ * |-------|---|---|---|--------------|
+ * |   B   |   | C |   |              |
+ * |-------|---|---|---|--------------|
+ * |   C   |   | C | E |              |
+ * |-------|---|---|---|--------------|
+ * |   E   |   |   |   | End state.   |
+ * |-------|---|---|---|--------------|
+ *
+ * But for ease of writing, we need to introduce more meaningful names for states of
+ * a finite automaton. The following table shows the matching state names from the
+ * previous table and meaningful names. Meaningful are collected in the enumeration
+ * State.
+ *
+ * |---|------------------------|
+ * |   |    Meaningful name     |
+ * |---|------------------------|
+ * | A | Begin_class_complement |
+ * |---|------------------------|
+ * | B | First_char             |
+ * |---|------------------------|
+ * | C | Body_chars             |
+ * |---|------------------------|
+ * | E | End_class_complement   |
+ * |---|------------------------|
+ *
+ */
+    size_t get_set_complement();
 };
 
 using Expr_scaner_ptr = std::shared_ptr<Expr_scaner>;
