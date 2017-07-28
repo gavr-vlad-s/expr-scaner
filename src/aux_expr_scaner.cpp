@@ -535,8 +535,17 @@ void Aux_expr_scaner::delimiter_final_proc(){
 }
 
 void Aux_expr_scaner::classes_final_proc(){
-    token.code = a_classes_jump_table[state].code;
-    correct_class();
+    switch(state){
+        case -1:
+            token.code = Aux_expr_lexem_code::Character;  token.c = U'[';
+            break;
+        case -2:
+            token.code = Aux_expr_lexem_code::UnknownLexem;
+            break;
+        default:
+            token.code = a_classes_jump_table[state].code;
+            correct_class();
+    }
 }
 
 void Aux_expr_scaner::char_final_proc(){
