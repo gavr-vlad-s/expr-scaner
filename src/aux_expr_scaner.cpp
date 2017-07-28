@@ -298,7 +298,7 @@ bool Aux_expr_scaner::start_proc() {
         (loc->pcurrent_char)--;
     }else if(belongs(Dollar, char_categories)){
         automaton = A_action;    token.code = Aux_expr_lexem_code::Action;
-        buffer = U"";
+        buffer.clear();
     }else if(belongs(Opened_square_br, char_categories)){
         automaton = A_class,     token.code = Aux_expr_lexem_code::Character;
         token.c = U'[';
@@ -511,6 +511,7 @@ bool Aux_expr_scaner::hat_proc(){
     bool t = false;
     if(ch == U']'){
         token.code = Aux_expr_lexem_code::End_char_class_complement;
+        (loc->pcurrent_char)++;
     }
     return t;
 }
