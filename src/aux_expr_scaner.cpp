@@ -325,11 +325,9 @@ static const char* class_strings[] = {
     "[:bdigits:]", "[:digits:]",  "[:latin:]",
     "[:letter:]",  "[:odigits:]", "[:russian:]",
     "[:xdigits:]", "[:ndq:]",     "[:nsq:]"
-//     "[:Latin:]",    "[:Letter:]",       "[:Russian:]",
-//     "[:bdigits:]",  "[:digits:]",       "[:latin:]",
-//     "[:letter:]",   "[:ndq:]",          "[:nsq:]",
-//     "[:odigits:]",  "[:russian:]",      "[:xdigits:]"
 };
+
+static const char* line_expects = "Line %zu expects %s.\n";
 
 void Aux_expr_scaner::correct_class(){
     /* This function corrects the code of the token, most likely a character class,
@@ -337,8 +335,7 @@ void Aux_expr_scaner::correct_class(){
     if(token.code >= Aux_expr_lexem_code::M_Class_Latin){
         int y = static_cast<int>(token.code) -
                 static_cast<int>(Aux_expr_lexem_code::M_Class_Latin);
-        printf("Line %zu expects %s.\n",
-               loc->current_line,class_strings[y]);
+        printf(line_expects, loc->current_line,class_strings[y]);
         token.code = static_cast<Aux_expr_lexem_code>(y +
                         static_cast<int>(Aux_expr_lexem_code::Class_Latin));
         en -> increment_number_of_errors();
@@ -417,6 +414,9 @@ bool Aux_expr_scaner::classes_proc(){
         case -1:
             if(U':' == ch){
                 state = -2; t = true;
+            }else if(U'^' == ch){
+                token.code = Aux_expr_lexem_code::Begin_char_class_complement;
+                (loc->pcurrent_char)++;
             }
             break;
         case -2:
@@ -426,8 +426,6 @@ bool Aux_expr_scaner::classes_proc(){
                                        sizeof(State_for_char));
                 token.code = a_classes_jump_table[state].code;
                 t = true;
-            }else if(belongs(Hat, char_categories)){
-                token.code = Aux_expr_lexem_code::Begin_char_class_complement;
             }else{
                 printf(expects_LRbdlnorx, loc->current_line);
                 en -> increment_number_of_errors();
