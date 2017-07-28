@@ -127,15 +127,15 @@ static const Segment_with_value<char32_t, uint64_t> categories_table[] = {
     {{U'y', U'z'},   12},  {{U'(', U'+'},  528},  {{U'L', U'L'},  268},
     {{U'[', U'['},  640},  {{U'_', U'_'},   12},  {{U'd', U'd'},  268},
     {{U'n', U'n'},  780},  {{U's', U'w'},   12},  {{U'|', U'|'},  528},
-    {{U'$', U'$'},  544},  {{U'0', U'9'},    8},  {{U'A', U'K'},   12},
+    {{U'"', U'"'},  512},  {{U'0', U'9'},    8},  {{U'A', U'K'},   12},
     {{U'M', U'Q'},   12},  {{U'S', U'Z'},   12},  {{U'\\', U'\\'},  576},
-    {{U'^', U'^'}, 4096},  {{U'a', U'a'},   12},  {{U'c', U'c'},   12},
+    {{U'^', U'^'}, 4608},  {{U'a', U'a'},   12},  {{U'c', U'c'},   12},
     {{U'e', U'k'},   12},  {{U'm', U'm'},   12},  {{U'o', U'o'},  268},
     {{U'r', U'r'},  268},  {{U'x', U'x'},  268},  {{U'{', U'{'}, 1552},
-    {{U'}', U'}'}, 2576},  {{   1,   32},    1}
+    {{U'}', U'}'}, 2576},  {{   1,   32},    1},  {{U'$', U'$'},  544}
 };
 
-static const size_t num_of_elems_in_categories_table = 32;
+static const size_t num_of_elems_in_categories_table = 33;
 
 uint64_t get_categories_set(char32_t c)
 {
