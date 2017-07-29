@@ -8,11 +8,25 @@
 */
 
 #include "../include/expr_scaner.h"
+#include "../include/aux_expr_lexem.h"
 // #include "../include/belongs.h"
 #include <cstdlib>
 #include <cstdio>
 // #include "../include/search_char.h"
 // #include "../include/get_init_state.h"
+
+Expr_lexem_info Expr_scaner::current_lexem(){
+    Expr_lexem_info     eli;
+    Aux_expr_lexem_info aeli;
+    Aux_expr_lexem_code aelic;
+
+    while((aelic = (aeli = aux_scaner-> current_lexem()).code) !=
+          Aux_expr_lexem_code::Nothing)
+    {
+        switch(aelic){}
+    }
+    return eli;
+}
 
 // enum Category : uint16_t {
 //     Spaces,            Other,             Action_name_begin,
