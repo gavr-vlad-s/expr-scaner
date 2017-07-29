@@ -20,6 +20,7 @@
 #include "../include/expr_lexem_info.h"
 #include "../include/aux_expr_scaner.h"
 #include "../include/aux_expr_lexem.h"
+#include "../include/errors_and_tries.h"
 
 class Expr_scaner{
 public:
@@ -27,8 +28,10 @@ public:
     Expr_scaner(const Location_ptr&              location,
                 const Errors_and_tries&          et,
                 const Trie_for_set_of_char32ptr& trie_for_complement_of_set) :
+        compl_set_trie(trie_for_complement_of_set),
         aux_scaner(std::make_unique<Aux_expr_scaner>(location, et)),
-        compl_set_trie(trie_for_complement_of_set) {};
+        et_(et)
+        {}
     Expr_scaner(const Expr_scaner& orig) = default;
     ~Expr_scaner()                       = default;
 
@@ -36,6 +39,7 @@ public:
 private:
     Trie_for_set_of_char32ptr compl_set_trie;
     Aux_expr_scaner_ptr       aux_scaner;
+    Errors_and_tries          et_;
 
     enum class State{
         Begin_class_complement, First_char,
@@ -48,7 +52,7 @@ private:
  *          ab+c
  * where
  *      a is the lexeme 'Begin_char_class_complement',
- *      b is the lexeme 'Character',
+ *      b is the lexeme 'Character' or 'Character class',
  *      c is the lexeme 'End_char_class_complement'.
  *
  * If we construct a non-deterministic finite automaton by this regexp, next we build
@@ -86,21 +90,24 @@ private:
  * |---|------------------------|
  *
  */
+
+    State               state;
+    size_t              set_idx = 0;
+
+    Aux_expr_lexem_info aeli;
+    Aux_expr_lexem_code aelic;
+
     size_t get_set_complement();
 
-    using State_proc = size_t (Expr_scaner::*)();
+    using State_proc = void (Expr_scaner::*)();
 
-    State state;
 
     std::set<char32_t> curr_set;
 
     static State_proc procs[];
 
-    size_t begin_class_complement_proc(); size_t first_char_proc();
-    size_t body_chars_proc();             size_t end_class_complement_proc();
-
-    Aux_expr_lexem_info aeli;
-    Aux_expr_lexem_code aelic;
+    void begin_class_complement_proc(); void first_char_proc();
+    void body_chars_proc();             void end_class_complement_proc();
 };
 
 using Expr_scaner_ptr = std::shared_ptr<Expr_scaner>;

@@ -14,7 +14,7 @@ void Error_count::increment_number_of_errors(){
     number_of_errors++;
 }
 
-int Error_count::get_number_of_errors(){
+int Error_count::get_number_of_errors() const{
     return number_of_errors;
 }
 

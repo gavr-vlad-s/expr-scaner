@@ -15,7 +15,7 @@ public:
     Error_count() : number_of_errors(0) {};
     void increment_number_of_errors();
     void print();
-    int get_number_of_errors();
+    int get_number_of_errors() const;
 private:
     int number_of_errors;
 };
