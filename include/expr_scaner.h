@@ -12,6 +12,7 @@
 
 #include <string>
 #include <memory>
+#include <set>
 #include "../include/location.h"
 #include "../include/error_count.h"
 #include "../include/trie.h"
@@ -67,7 +68,7 @@ private:
  *
  * But for ease of writing, we need to introduce more meaningful names for states of
  * a finite automaton. The following table shows the matching state names from the
- * previous table and meaningful names. Meaningful are collected in the enumeration
+ * previous table and meaningful names. Meaningful names are collected in the enumeration
  * State.
  *
  * |---|------------------------|
@@ -84,6 +85,17 @@ private:
  *
  */
     size_t get_set_complement();
+
+    using State_proc = void (Expr_scaner::*)();
+
+    State state;
+
+    std::set<char32_t> curr_set;
+
+    static State_proc procs[];
+
+    void begin_class_complement_proc(); void first_char_proc();
+    void body_chars_proc();             void end_class_complement_proc();
 };
 
 using Expr_scaner_ptr = std::shared_ptr<Expr_scaner>;
