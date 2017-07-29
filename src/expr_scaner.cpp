@@ -115,7 +115,12 @@ size_t Expr_scaner::get_set_complement(){
 
     while((aelic = (aeli = aux_scaner-> current_lexem()).code) !=
           Aux_expr_lexem_code::Nothing)
-    {}
+    {
+        ret_val = (this->*procs[static_cast<size_t>(state)])();
+        if(State::End_class_complement == state){
+            break;
+        }
+    }
     return ret_val;
 }
 

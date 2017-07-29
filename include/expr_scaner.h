@@ -86,7 +86,7 @@ private:
  */
     size_t get_set_complement();
 
-    using State_proc = void (Expr_scaner::*)();
+    using State_proc = size_t (Expr_scaner::*)();
 
     State state;
 
@@ -94,8 +94,8 @@ private:
 
     static State_proc procs[];
 
-    void begin_class_complement_proc(); void first_char_proc();
-    void body_chars_proc();             void end_class_complement_proc();
+    size_t begin_class_complement_proc(); size_t first_char_proc();
+    size_t body_chars_proc();             size_t end_class_complement_proc();
 };
 
 using Expr_scaner_ptr = std::shared_ptr<Expr_scaner>;
