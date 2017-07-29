@@ -106,12 +106,23 @@ Expr_scaner::State_proc Expr_scaner::procs[] = {
     &Expr_scaner::end_class_complement_proc
 };
 
+size_t Expr_scaner::begin_class_complement_proc(){
+    if(Aux_expr_lexem_code::Begin_char_class_complement == aelic){
+        state = State::First_char;
+    }
+}
+
+size_t Expr_scaner::first_char_proc(){}
+
+size_t Expr_scaner::body_chars_proc(){}
+
+size_t Expr_scaner::end_class_complement_proc(){}
+
 size_t Expr_scaner::get_set_complement(){
     size_t ret_val = 0;
     state = Begin_class_complement::Begin_class_complement;
 
-    Aux_expr_lexem_info aeli;
-    Aux_expr_lexem_code aelic;
+    curr_set.clear();
 
     while((aelic = (aeli = aux_scaner-> current_lexem()).code) !=
           Aux_expr_lexem_code::Nothing)
@@ -126,8 +137,6 @@ size_t Expr_scaner::get_set_complement(){
 
 Expr_lexem_info Expr_scaner::current_lexem(){
     Expr_lexem_info     eli;
-    Aux_expr_lexem_info aeli;
-    Aux_expr_lexem_code aelic;
 
     aelic = (aeli = aux_scaner-> current_lexem()).code;
     switch(aelic){

@@ -18,6 +18,8 @@
 #include "../include/trie.h"
 #include "../include/trie_for_set.h"
 #include "../include/expr_lexem_info.h"
+#include "../include/aux_expr_scaner.h"
+#include "../include/aux_expr_lexem.h"
 
 class Expr_scaner{
 public:
@@ -96,6 +98,9 @@ private:
 
     size_t begin_class_complement_proc(); size_t first_char_proc();
     size_t body_chars_proc();             size_t end_class_complement_proc();
+
+    Aux_expr_lexem_info aeli;
+    Aux_expr_lexem_code aelic;
 };
 
 using Expr_scaner_ptr = std::shared_ptr<Expr_scaner>;
