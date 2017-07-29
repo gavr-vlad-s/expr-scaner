@@ -9,7 +9,7 @@
 
 #include "../include/expr_scaner.h"
 #include "../include/aux_expr_lexem.h"
-// #include "../include/belongs.h"
+#include "../include/belongs.h"
 #include <cstdlib>
 #include <cstdio>
 
@@ -55,7 +55,69 @@
 //     Class_xdigits,       Class_complement
 // };
 
-Expr_lexem_info convert_lexeme(const Aux_expr_lexem_info aeli){}
+template<typename T>
+bool is_in_segment(T value, T lower, T upper)
+{
+    return (lower <= value) && (value <= upper);
+}
+
+static const std::set<char32_t> single_quote = {U'\''};
+static const std::set<char32_t> double_quote = {U'\"'};
+
+Expr_lexem_info convert_lexeme(const Aux_expr_lexem_info aeli){
+    Expr_lexem_info     eli;
+    Aux_expr_lexem_code aelic = aeli.code;
+
+    if(is_in_segment(aelic, Aux_expr_lexem_code::Nothing,
+                     Aux_expr_lexem_code::Class_xdigits)
+    {
+        eli.code = static_cast<Expr_lexem_code>(aelic);
+        if(aelic == Aux_expr_lexem_code::Character)
+        {
+            eli.c = aeli.c;
+        }else if(aelic == Aux_expr_lexem_code::Action)
+        {
+            eli.action_name_index = aeli.action_name_index;
+        }
+        return eli;
+    }
+
+    if(is_in_segment(aelic, Aux_expr_lexem_code::M_Class_Latin,
+                     Aux_expr_lexem_code::M_Class_nsq))
+    {
+        int y = static_cast<int>(aelic) -
+                static_cast<int>(Aux_expr_lexem_code::M_Class_Latin) +
+                static_cast<int>(Aux_expr_lexem_code::Class_Latin);
+        aelic = static_cast<Aux_expr_lexem_code>(y);
+    }
+
+    eli.code = Expr_lexem_code::Class_complement;
+    eli.set_of_char_index = (Aux_expr_lexem_code::Class_ndq == aelic) ?
+                            (compl_set_trie->insertSet(double_quote)):
+                            (compl_set_trie->insertSet(single_quote));
+
+    return eli;
+}
+
+Expr_scaner::State_proc Expr_scaner::procs[] = {
+    &Expr_scaner::begin_class_complement_proc,
+    &Expr_scaner::first_char_proc,
+    &Expr_scaner::body_chars_proc,
+    &Expr_scaner::end_class_complement_proc
+};
+
+size_t Expr_scaner::get_set_complement(){
+    size_t ret_val = 0;
+    state = Begin_class_complement::Begin_class_complement;
+
+    Aux_expr_lexem_info aeli;
+    Aux_expr_lexem_code aelic;
+
+    while((aelic = (aeli = aux_scaner-> current_lexem()).code) !=
+          Aux_expr_lexem_code::Nothing)
+    {}
+    return ret_val;
+}
 
 Expr_lexem_info Expr_scaner::current_lexem(){
     Expr_lexem_info     eli;
@@ -63,28 +125,21 @@ Expr_lexem_info Expr_scaner::current_lexem(){
     Aux_expr_lexem_code aelic;
 
     aelic = (aeli = aux_scaner-> current_lexem()).code;
-
-//     while((aelic = (aeli = aux_scaner-> current_lexem()).code) !=
-//           Aux_expr_lexem_code::Nothing)
-//     {
-        switch(aelic){
-            case Aux_expr_lexem_code::Nothing ... Aux_expr_lexem_code::Class_xdigits:
-            case Aux_expr_lexem_code::Class_ndq:
-            case Aux_expr_lexem_code::Class_nsq:
-            case Aux_expr_lexem_code::M_Class_Latin ... Aux_expr_lexem_code::M_Class_nsq:
-                eli = convert_lexeme(aeli);
-                return eli;
-                break;
-            case Aux_expr_lexem_code::Begin_char_class_complement:
-                aux_scaner->back();
-                eli.code              = Expr_lexem_code::Class_complement;
-                eli.set_of_char_index = get_set_complement();
-                break;
-            case Aux_expr_lexem_code::End_char_class_complement:
-                eli.code = Expr_lexem_code::UnknownLexem;
-                return eli;
-        }
-//     }
+    switch(aelic){
+        case Aux_expr_lexem_code::Nothing ... Aux_expr_lexem_code::Class_xdigits:
+        case Aux_expr_lexem_code::Class_ndq:
+        case Aux_expr_lexem_code::Class_nsq:
+        case Aux_expr_lexem_code::M_Class_Latin ... Aux_expr_lexem_code::M_Class_nsq:
+            eli = convert_lexeme(aeli);
+            break;
+        case Aux_expr_lexem_code::Begin_char_class_complement:
+            aux_scaner->back();
+            eli.code              = Expr_lexem_code::Class_complement;
+            eli.set_of_char_index = get_set_complement();
+            break;
+        case Aux_expr_lexem_code::End_char_class_complement:
+            eli.code = Expr_lexem_code::UnknownLexem;
+    }
     return eli;
 }
 
