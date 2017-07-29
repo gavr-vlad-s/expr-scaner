@@ -108,6 +108,8 @@ private:
 
     void begin_class_complement_proc(); void first_char_proc();
     void body_chars_proc();             void end_class_complement_proc();
+
+    Expr_lexem_info convert_lexeme(Aux_expr_lexem_info);
 };
 
 using Expr_scaner_ptr = std::shared_ptr<Expr_scaner>;

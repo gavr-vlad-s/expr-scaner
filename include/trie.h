@@ -93,7 +93,7 @@ protected:
 
 template<typename T>
 Trie<T>::Trie(){
-    node_buffer = std::vector<node>(1);
+    node_buffer   = std::vector<node>(1);
     nodes_indeces = std::vector<size_t>();
 }
 

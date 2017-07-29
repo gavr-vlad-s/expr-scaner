@@ -37,8 +37,8 @@ template<typename T>
 std::set<T> Trie_for_set<T>::get_set(size_t idx){
     std::set<T> s;
     size_t current = idx;
-    for( ; current; current = node_buffer[current].parent){
-        s.insert(node_buffer[current].c);
+    for( ; current; current = Trie<T>::node_buffer[current].parent){
+        s.insert(Trie<T>::node_buffer[current].c);
     }
     return s;
 }
@@ -53,12 +53,12 @@ size_t Trie_for_set<T>::insertSet(const std::set<T>& s){
     for(auto ch : s){
         str += ch;
     }
-    size_t idx = insert(str);
+    size_t idx = this->insert(str);
     return idx;
 }
 
 using Trie_for_set_of_char32    = Trie_for_set<char32_t>;
-using Trie_for_set_of_sizet     = Trie_for_set<char32_t>;
+using Trie_for_set_of_sizet     = Trie_for_set<size_t>;
 using Trie_for_set_of_char32ptr = std::shared_ptr<Trie_for_set_of_char32>;
 using Trie_for_set_of_sizetptr  = std::shared_ptr<Trie_for_set_of_sizet>;
 #endif

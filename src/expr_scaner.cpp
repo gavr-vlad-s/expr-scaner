@@ -94,12 +94,12 @@ static const char* not_admissible_lexeme =
     "Error at line %zu: expected a character or character class, with the "
     "exception of [:nsq:] and [:ndq:].\n";
 
-Expr_lexem_info convert_lexeme(const Aux_expr_lexem_info aeli){
+Expr_lexem_info Expr_scaner::convert_lexeme(const Aux_expr_lexem_info aeli){
     Expr_lexem_info     eli;
     Aux_expr_lexem_code aelic = aeli.code;
 
     if(is_in_segment(aelic, Aux_expr_lexem_code::Nothing,
-                     Aux_expr_lexem_code::Class_xdigits)
+                     Aux_expr_lexem_code::Class_xdigits))
     {
         eli.code = static_cast<Expr_lexem_code>(aelic);
         if(aelic == Aux_expr_lexem_code::Character)
@@ -151,8 +151,9 @@ void Expr_scaner::first_char_proc(){
     if(Aux_expr_lexem_code::Character == aelic){
         curr_set.insert(aeli.c);
     }else if(belongs(aelic, classes_of_chars_without_complement)){
-        curr_set.insert(sets_for_char_classes[static_cast<size_t>(aelic)]);
-    }else if(belongs(aelic, classes_of_chars_with_complement){
+        const auto& s = sets_for_char_classes[static_cast<size_t>(aelic)];
+        curr_set.insert(s.begin(), s.end());
+    }else if(belongs(aelic, classes_of_chars_with_complement)){
         printf(not_admissible_nsq_ndq, aux_scaner->lexem_begin_line_number());
         et_.ec->increment_number_of_errors();
     }else{
@@ -166,8 +167,9 @@ void Expr_scaner::body_chars_proc(){
     if(Aux_expr_lexem_code::Character == aelic){
         curr_set.insert(aeli.c);
     }else if(belongs(aelic, classes_of_chars_without_complement)){
-        curr_set.insert(sets_for_char_classes[static_cast<size_t>(aelic)]);
-    }else if(belongs(aelic, classes_of_chars_with_complement){
+        const auto& s = sets_for_char_classes[static_cast<size_t>(aelic)];
+        curr_set.insert(s.begin(), s.end());
+    }else if(belongs(aelic, classes_of_chars_with_complement)){
         printf(not_admissible_nsq_ndq, aux_scaner->lexem_begin_line_number());
         et_.ec->increment_number_of_errors();
     }else if(Aux_expr_lexem_code::End_char_class_complement == aelic){
@@ -182,7 +184,7 @@ void Expr_scaner::end_class_complement_proc(){}
 
 size_t Expr_scaner::get_set_complement(){
     set_idx = 0;
-    state   = Begin_class_complement::Begin_class_complement;
+    state   = State::Begin_class_complement;
 
     curr_set.clear();
 
