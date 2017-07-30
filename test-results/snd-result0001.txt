@@ -1,0 +1,43 @@
+Begin_expression  
+Opened_round_brack  
+Class_Latin  
+Or  
+Class_latin  
+Or  
+Class_Russian  
+Or  
+Class_russian  
+Or  
+Class_bdigits  
+Or  
+Character '_' 
+Closed_round_brack  
+Positive_closure  
+Class_digits  
+Optional_member  
+Class_xdigits  
+Kleene_closure  
+Character '[' 
+Character ']' 
+Character '\n' 
+Character '\' 
+Character " 
+Character '$' 
+Character '?' 
+Character '|' 
+Character '+' 
+Character '*' 
+Character '{' 
+Character '}' 
+Character '(' 
+Character ')' 
+Character 'Ё' 
+Class_Letter  
+Class_letter  
+Class_complement {'} 
+Action  
+Class_complement {"} 
+Character '^' 
+Error at line 11: expected a character or character class, with the exception of [:nsq:] and [:ndq:].
+Class_complement {'0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','^','Ё','А','Б','В','Г','Д','Е','Ж','З','И','Й','К','Л','М','Н','О','П','Р','С','Т','У','Ф','Х','Ц','Ч','Ш','Щ','Ъ','Ы','Ь','Э','Ю','Я'} 
+Nothing  

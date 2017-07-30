@@ -146,12 +146,20 @@ void Expr_scaner::begin_class_complement_proc(){
     }
 }
 
+static const size_t first_char_class =
+    static_cast<size_t>(Aux_expr_lexem_code::Class_Latin);
+
+inline size_t char_class_to_array_index(Aux_expr_lexem_code e)
+{
+    return static_cast<uint64_t>(e) - first_char_class;
+}
+
 void Expr_scaner::first_char_proc(){
     state = State::Body_chars;
     if(Aux_expr_lexem_code::Character == aelic){
         curr_set.insert(aeli.c);
     }else if(belongs(aelic, classes_of_chars_without_complement)){
-        const auto& s = sets_for_char_classes[static_cast<size_t>(aelic)];
+        const auto& s = sets_for_char_classes[char_class_to_array_index(aelic)];
         curr_set.insert(s.begin(), s.end());
     }else if(belongs(aelic, classes_of_chars_with_complement)){
         printf(not_admissible_nsq_ndq, aux_scaner->lexem_begin_line_number());
@@ -167,7 +175,7 @@ void Expr_scaner::body_chars_proc(){
     if(Aux_expr_lexem_code::Character == aelic){
         curr_set.insert(aeli.c);
     }else if(belongs(aelic, classes_of_chars_without_complement)){
-        const auto& s = sets_for_char_classes[static_cast<size_t>(aelic)];
+        const auto& s = sets_for_char_classes[char_class_to_array_index(aelic)];
         curr_set.insert(s.begin(), s.end());
     }else if(belongs(aelic, classes_of_chars_with_complement)){
         printf(not_admissible_nsq_ndq, aux_scaner->lexem_begin_line_number());

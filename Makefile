@@ -1,7 +1,7 @@
 LINKER        = g++
-LINKERFLAGS   =  -s
+LINKERFLAGS   =  
 COMPILER      = g++
-COMPILERFLAGS =  -std=c++14 -Wall
+COMPILERFLAGS =  -std=c++14 -Wall -g
 BIN           = test_scaner_main
 LIBS          = -lboost_filesystem -lboost_system
 vpath %.cpp src
