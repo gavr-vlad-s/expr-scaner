@@ -12,6 +12,9 @@
 #include <memory>
 #include "../include/expr_scaner.h"
 #include "../include/expr_lexem_info.h"
-void print_expr_lexem(Expr_lexem_info li);
-void test_expr_scaner(std::shared_ptr<Expr_scaner> sc);
+#include "../include/trie_for_set.h"
+void print_expr_lexem(const Expr_lexem_info& li,
+                      const Trie_for_set_of_char32ptr& t);
+void test_expr_scaner(const std::shared_ptr<Expr_scaner>& sc,
+                      const Trie_for_set_of_char32ptr& t);
 #endif

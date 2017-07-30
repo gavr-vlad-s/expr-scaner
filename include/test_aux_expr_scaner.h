@@ -13,5 +13,5 @@
 #include "../include/aux_expr_scaner.h"
 #include "../include/aux_expr_lexem.h"
 void print_aux_lexem(Aux_expr_lexem_info li);
-void test_aux_scaner(std::shared_ptr<Aux_expr_scaner> sc);
+void test_aux_scaner(std::shared_ptr<Aux_expr_scaner>& sc);
 #endif

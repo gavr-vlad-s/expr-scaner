@@ -47,7 +47,7 @@ void print_aux_lexem(Aux_expr_lexem_info li){
     printf(" \n");
 }
 
-void test_aux_scaner(std::shared_ptr<Aux_expr_scaner> sc)
+void test_aux_scaner(std::shared_ptr<Aux_expr_scaner>& sc)
 {
     Aux_expr_lexem_info lexem;
     do{
