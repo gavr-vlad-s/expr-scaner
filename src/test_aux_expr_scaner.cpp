@@ -10,6 +10,7 @@
 #include <cstdio>
 #include "../include/test_aux_expr_scaner.h"
 #include "../include/char_conv.h"
+#include "../include/print_char32.h"
 
 /* Данный массив состоит из строковых литералов, представляющих собой заключённые
  * в кавычки идентификаторы из перечисления Lexem_code. Строки идут в том же
@@ -34,13 +35,14 @@ void print_aux_lexem(Aux_expr_lexem_info li){
     Aux_expr_lexem_code lc = li.code;
     printf("%s", lexem_names[static_cast<uint16_t>(lc)]);
     if(Aux_expr_lexem_code::Character == lc){
-        char32_t ch = li.c;
-        if(ch < U' '){
-            printf(" %u", ch);
-        }else{
-            std::string s = char32_to_utf8(ch);
-            printf(" '%s'",s.c_str());
-        }
+        print_char32(li.c);
+//         char32_t ch = li.c;
+//         if(ch < U' '){
+//             printf(" %u", ch);
+//         }else{
+//             std::string s = char32_to_utf8(ch);
+//             printf(" '%s'",s.c_str());
+//         }
     }
     printf(" \n");
 }

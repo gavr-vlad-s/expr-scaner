@@ -62,7 +62,12 @@ int main(int argc, char** argv) {
             etr.ids_trie  = std::make_shared<Char_trie>();
             etr.strs_trie = std::make_shared<Char_trie>();
             auto aesc     = std::make_shared<Aux_expr_scaner>(loc,  etr);
+#define TEST_AUX_SCANER
+#ifdef TEST_AUX_SCANER
             test_aux_scaner(aesc);
+#else
+
+#endif
         }
     }
     return 0;
