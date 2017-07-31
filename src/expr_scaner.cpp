@@ -141,17 +141,15 @@ Expr_scaner::State_proc Expr_scaner::procs[] = {
 };
 
 void Expr_scaner::begin_class_complement_proc(){
-    if(Aux_expr_lexem_code::Begin_char_class_complement == aelic){
-        state = State::First_char;
-    }
+    state = State::First_char;
 }
 
-static const size_t first_char_class =
+static const size_t first_code_of_char_class =
     static_cast<size_t>(Aux_expr_lexem_code::Class_Latin);
 
 inline size_t char_class_to_array_index(Aux_expr_lexem_code e)
 {
-    return static_cast<uint64_t>(e) - first_char_class;
+    return static_cast<uint64_t>(e) - first_code_of_char_class;
 }
 
 void Expr_scaner::first_char_proc(){
@@ -182,6 +180,7 @@ void Expr_scaner::body_chars_proc(){
         et_.ec->increment_number_of_errors();
     }else if(Aux_expr_lexem_code::End_char_class_complement == aelic){
         set_idx = compl_set_trie->insertSet(curr_set);
+        state = State::End_class_complement;
     }else{
         printf(not_admissible_lexeme, aux_scaner->lexem_begin_line_number());
         et_.ec->increment_number_of_errors();
