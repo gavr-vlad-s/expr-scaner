@@ -15,10 +15,7 @@ enum class Expr_lexem_code : uint16_t {
     Opened_round_brack,  Closed_round_brack, Or,
     Kleene_closure,      Positive_closure,   Optional_member,
     Character,           Begin_expression,   End_expression,
-    Class_Latin,         Class_Letter,       Class_Russian,
-    Class_bdigits,       Class_digits,       Class_latin,
-    Class_letter,        Class_odigits,      Class_russian,
-    Class_xdigits,       Class_complement
+    Class_complement,    Character_class
 };
 
 struct Expr_lexem_info{

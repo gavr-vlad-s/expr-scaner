@@ -18,10 +18,7 @@ static const char* lexem_names[] = {
     "Opened_round_brack", "Closed_round_brack", "Or",
     "Kleene_closure",     "Positive_closure",   "Optional_member",
     "Character",          "Begin_expression",   "End_expression",
-    "Class_Latin",        "Class_Letter",       "Class_Russian",
-    "Class_bdigits",      "Class_digits",       "Class_latin",
-    "Class_letter",       "Class_odigits",      "Class_russian",
-    "Class_xdigits",      "Class_complement"
+    "Class_complement",   "Character_class"
 };
 
 void print_expr_lexem(const Expr_lexem_info& li,
@@ -31,13 +28,18 @@ void print_expr_lexem(const Expr_lexem_info& li,
 
     Expr_lexem_code lc = li.code;
     printf("%s ", lexem_names[static_cast<uint16_t>(lc)]);
-    if(Expr_lexem_code::Character == lc){
-        print_char32(li.c);
-    }else if(Expr_lexem_code::Class_complement == lc){
-        print_set(t->get_set(li.set_of_char_index), print_char32);
+    switch(lc){
+        case Expr_lexem_code::Character:
+            print_char32(li.c);
+            break;
+        case Expr_lexem_code::Class_complement:
+        case Expr_lexem_code::Character_class:
+            print_set(t->get_set(li.set_of_char_index), print_char32);
+            break;
+        default:
+            ;
     }
     printf(" \n");
-
 }
 
 void test_expr_scaner(const std::shared_ptr<Expr_scaner>& sc,
