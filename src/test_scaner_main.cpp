@@ -72,6 +72,7 @@ int main(int argc, char** argv) {
             auto esc           = std::make_shared<Expr_scaner>(loc, etr, trie_for_sets);
             test_expr_scaner(esc, trie_for_sets);
 #endif
+            printf("Current line: %zu.\n", loc->current_line);
         }
     }
     return 0;
